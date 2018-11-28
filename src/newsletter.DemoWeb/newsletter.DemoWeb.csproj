@@ -59,6 +59,7 @@
     <PackageReference Include="cloudscribe.EmailList.Web.Mvc" Version="2.1.3" />
     <PackageReference Include="cloudscribe.EmailList.Views.Bootstrap4" Version="2.1.2" />
     <PackageReference Include="cloudscribe.EmailList.CoreIntegration" Version="2.1.2" />
+    <PackageReference Include="cloudscribe.EmailList.KvpUserProperties.Integration" Version="1.0.1" />
     <PackageReference Include="cloudscribe.EmailQueue.CoreIntegration" Version="2.1.0" />
     <PackageReference Include="cloudscribe.EmailQueue.HangfireIntegration" Version="2.1.0" />
     
@@ -73,6 +74,12 @@
     <PackageReference Include="cloudscribe.EmailQueue.Data.EFCore.MSSQL" Version="2.1.2" />
     <PackageReference Include="cloudscribe.EmailQueue.Data.EFCore.MySql" Version="2.1.2" />
     <PackageReference Include="cloudscribe.EmailQueue.Data.EFCore.PostgreSql" Version="2.1.2" />
+
+    <PackageReference Include="cloudscribe.UserProperties.Kvp" Version="3.0.2" />
+    <PackageReference Include="cloudscribe.UserProperties" Version="3.0.2" />
+    <PackageReference Include="cloudscribe.Kvp.Storage.EFCore.MSSQL" Version="3.0.3" />
+    <PackageReference Include="cloudscribe.Kvp.Storage.EFCore.PostgreSql" Version="3.0.3" />
+    <PackageReference Include="cloudscribe.Kvp.Storage.EFCore.MySql" Version="3.0.3" />
     
     <PackageReference Include="Microsoft.AspNetCore.App" />
     

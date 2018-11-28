@@ -45,12 +45,12 @@ namespace newsletter.DemoWeb
         private static void EnsureDataStorageIsReady(IServiceProvider scopedServices)
         {
             LoggingEFStartup.InitializeDatabaseAsync(scopedServices).Wait();
-
             CoreEFStartup.InitializeDatabaseAsync(scopedServices).Wait();
-
             SimpleContentEFStartup.InitializeDatabaseAsync(scopedServices).Wait();
-
-
+            KvpEFCoreStartup.InitializeDatabaseAsync(scopedServices).Wait();
+            EmailQueueDatabase.InitializeDatabaseAsync(scopedServices).Wait();
+            EmailListDatabase.InitializeDatabaseAsync(scopedServices).Wait();
+            EmailTemplateDatabase.InitializeDatabaseAsync(scopedServices).Wait();
 
 
         }

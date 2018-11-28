@@ -28,6 +28,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     services.AddCloudscribeLoggingPostgreSqlStorage(pgSqlConnectionString);
                     services.AddCloudscribeCorePostgreSqlStorage(pgSqlConnectionString);
                     services.AddCloudscribeSimpleContentPostgreSqlStorage(pgSqlConnectionString);
+                    services.AddCloudscribeKvpPostgreSqlStorage(pgSqlConnectionString);
                     services.AddEmailTemplatePostgreSqlStorage(pgSqlConnectionString);
                     services.AddEmailQueuePostgreSqlStorage(pgSqlConnectionString);
                     services.AddEmailListPostgreSqlStorage(pgSqlConnectionString);
@@ -59,6 +60,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     services.AddCloudscribeLoggingEFStorageMySQL(mySqlConnectionString);
                     services.AddCloudscribeCoreEFStorageMySql(mySqlConnectionString);
                     services.AddCloudscribeSimpleContentEFStorageMySQL(mySqlConnectionString);
+                    services.AddCloudscribeKvpEFStorageMySql(mySqlConnectionString);
                     services.AddEmailTemplateStorageMySql(mySqlConnectionString);
                     services.AddEmailQueueStorageMySql(mySqlConnectionString);
                     services.AddEmailListStorageMySql(mySqlConnectionString);
@@ -77,6 +79,7 @@ namespace Microsoft.Extensions.DependencyInjection
                     services.AddCloudscribeLoggingEFStorageMSSQL(msSqlConnectionString);
                     services.AddCloudscribeCoreEFStorageMSSQL(msSqlConnectionString);
                     services.AddCloudscribeSimpleContentEFStorageMSSQL(msSqlConnectionString);
+                    services.AddCloudscribeKvpEFStorageMSSQL(msSqlConnectionString);
                     services.AddEmailTemplateStorageMSSQL(msSqlConnectionString);
                     services.AddEmailQueueStorageMSSQL(msSqlConnectionString);
                     services.AddEmailListStorageMSSQL(msSqlConnectionString);
@@ -112,7 +115,10 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 services.AddScoped<IEmailQueueProcessor, HangFireEmailQueueProcessor>();
             }
-            
+
+            services.Configure<cloudscribe.UserProperties.Models.ProfilePropertySetContainer>(config.GetSection("ProfilePropertySetContainer"));
+            services.AddEmailListKvpIntegration(config);
+            services.AddCloudscribeKvpUserProperties();
             services.AddEmailQueueWithCloudscribeIntegration(config);
             services.AddEmailListWithCloudscribeIntegration(config);
 

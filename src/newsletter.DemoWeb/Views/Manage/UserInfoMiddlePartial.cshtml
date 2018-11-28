@@ -1,0 +1,25 @@
+﻿@model cloudscribe.Core.Web.ViewModels.SiteUser.UserInfoViewModel
+@using cloudscribe.UserProperties.Models
+@using cloudscribe.UserProperties.Services
+@using cloudscribe.UserProperties
+@inject IStringLocalizer<UserPropertyResources> sr
+@inject IProfileOptionsResolver customPropsResolver
+@{
+    var props = await customPropsResolver.GetProfileProps();
+}
+@foreach (var p in props.Properties)
+{
+    if (p.VisibleToUserOnProfile)
+    {
+        if(p.EditableByUserOnProfile)
+        {
+            await Html.RenderPartialAsync(p.EditPartialViewName, p as FormItemDefinition);
+        }
+        else
+        {
+            await Html.RenderPartialAsync(p.ReadOnlyPartialViewName, p as FormItemDefinition);
+        }
+    }
+}
+<partial name="EmailListUserPropsPartial" />
+
