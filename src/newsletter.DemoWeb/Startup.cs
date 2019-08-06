@@ -1,13 +1,9 @@
-﻿using cloudscribe.EmailQueue.HangfireIntegration;
-using cloudscribe.EmailQueue.Models;
-using Hangfire;
-using Microsoft.AspNetCore.Builder;
+﻿using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using newsletter.DemoWeb.Config;
 using System;
 
 
@@ -26,15 +22,12 @@ namespace newsletter.DemoWeb
             _log = logger;
 
             _sslIsAvailable = _configuration.GetValue<bool>("AppSettings:UseSsl");
-            _enableHangfireService = _configuration.GetValue<bool>("AppSettings:EnableHangfireService");
-            _enableHangfireDashboard = _configuration.GetValue<bool>("AppSettings:EnableHangfireDashboard");
+           
         }
 
         private readonly IConfiguration _configuration;
         private readonly IHostingEnvironment _environment;
         private readonly bool _sslIsAvailable;
-        private readonly bool _enableHangfireService = true;
-        private readonly bool _enableHangfireDashboard = true;
         private readonly ILogger _log;
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -57,12 +50,11 @@ namespace newsletter.DemoWeb
 
             //// **** IMPORTANT *****
             // This is a custom extension method in Config/CloudscribeFeatures.cs
-            var useHangfire = _enableHangfireService || _enableHangfireDashboard;
-            services.SetupDataStorage(_configuration, useHangfire);
+            services.SetupDataStorage(_configuration);
 
             //*** Important ***
             // This is a custom extension method in Config/CloudscribeFeatures.cs
-            services.SetupCloudscribeFeatures(_configuration, useHangfire);
+            services.SetupCloudscribeFeatures(_configuration);
 
             //*** Important ***
             // This is a custom extension method in Config/Localization.cs
@@ -128,30 +120,7 @@ namespace newsletter.DemoWeb
                     multiTenantOptions,
                     _sslIsAvailable);
 
-            if (_enableHangfireDashboard)
-            {
-                app.UseHangfireDashboard("/tasks", new DashboardOptions
-                {
-                    Authorization = new[] { new HangFireAuthorizationFilter() }
-                });
-            }
-
-            if (_enableHangfireService)
-            {
-                var options = new BackgroundJobServerOptions
-                {
-                    // This is the default value
-                    //WorkerCount = Environment.ProcessorCount * 5
-                    WorkerCount = 5
-                };
-                app.UseHangfireServer(options);
-
-                GlobalConfiguration.Configuration.UseActivator(new HangfireActivator(serviceProvider));
-                RecurringJob.RemoveIfExists("email-processor");
-                RecurringJob.AddOrUpdate<IEmailQueueProcessor>("email-processor", mp => mp.StartProcessing(), Cron.MinuteInterval(3));
-            }
-
-
+           
             app.UseMvc(routes =>
             {
                 var useFolders = multiTenantOptions.Mode == cloudscribe.Core.Models.MultiTenantMode.FolderName;
