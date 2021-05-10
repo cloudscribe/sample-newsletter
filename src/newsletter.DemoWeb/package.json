@@ -8,7 +8,7 @@
     "smartmenus": "^1.1.0",
     "smartmenus-bootstrap-4": "^0.1.0",
     "@fortawesome/fontawesome-free": "5.2.0",
-    "lodash": ">=4.17.19",
+    "lodash": ">=4.17.21",
     "lodash.template": ">=4.5.0",
     "clean-css": ">=4.1.11",
     "fstream": ">=1.0.12",
