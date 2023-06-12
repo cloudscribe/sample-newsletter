@@ -2,25 +2,25 @@
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TargetFramework>net60</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup Label="Package References">
 
-    <PackageReference Include="cloudscribe.EmailList.Web.Mvc" Version="2.1.4" />
-    <PackageReference Include="cloudscribe.EmailList.Data.EFCore.MSSQL" Version="2.1.2" />
-    <PackageReference Include="cloudscribe.EmailList.Data.EFCore.MySql" Version="2.1.2" />
-    <PackageReference Include="cloudscribe.EmailList.Data.EFCore.PostgreSql" Version="2.1.2" />
-    <PackageReference Include="cloudscribe.EmailQueue.Data.EFCore.MSSQL" Version="2.1.2" />
-    <PackageReference Include="cloudscribe.EmailQueue.Data.EFCore.MySql" Version="2.1.2" />
-    <PackageReference Include="cloudscribe.EmailQueue.Data.EFCore.PostgreSql" Version="2.1.2" />
-    <PackageReference Include="cloudscribe.EmailQueue.Services" Version="2.1.2" />
+    <PackageReference Include="cloudscribe.EmailList.Web.Mvc" Version="6.0.*" />
+    <PackageReference Include="cloudscribe.EmailList.Data.EFCore.MSSQL" Version="6.0.*" />
+    <PackageReference Include="cloudscribe.EmailList.Data.EFCore.MySql" Version="6.0.*" />
+    <PackageReference Include="cloudscribe.EmailList.Data.EFCore.PostgreSql" Version="6.0.*" />
+    <PackageReference Include="cloudscribe.EmailQueue.Data.EFCore.MSSQL" Version="6.0.*" />
+    <PackageReference Include="cloudscribe.EmailQueue.Data.EFCore.MySql" Version="6.0.*" />
+    <PackageReference Include="cloudscribe.EmailQueue.Data.EFCore.PostgreSql" Version="6.0.*" />
+    <PackageReference Include="cloudscribe.EmailQueue.Services" Version="6.0.*" />
 
-    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Configuration" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Logging.EventLog" Version="2.1.1" />
-    <PackageReference Include="Microsoft.Extensions.Hosting" Version="2.1.1" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="6.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="6.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Console" Version="6.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Logging.EventLog" Version="6.0.*" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="6.0.*" />
     
   </ItemGroup>
 
