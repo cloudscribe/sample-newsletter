@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.Extensions.Hosting;
 using System;
 
 
@@ -13,7 +14,7 @@ namespace newsletter.DemoWeb
     {
         public Startup(
             IConfiguration configuration,
-            IHostingEnvironment env,
+            IWebHostEnvironment env,
             ILogger<Startup> logger
             )
         {
@@ -26,7 +27,7 @@ namespace newsletter.DemoWeb
         }
 
         private readonly IConfiguration _configuration;
-        private readonly IHostingEnvironment _environment;
+        private readonly IWebHostEnvironment _environment;
         private readonly bool _sslIsAvailable;
         private readonly ILogger _log;
 
@@ -84,7 +85,7 @@ namespace newsletter.DemoWeb
         public void Configure(
             IServiceProvider serviceProvider,
             IApplicationBuilder app,
-            IHostingEnvironment env,
+            IWebHostEnvironment env,
             ILoggerFactory loggerFactory,
             IOptions<cloudscribe.Core.Models.MultiTenantOptions> multiTenantOptionsAccessor,
             IOptions<RequestLocalizationOptions> localizationOptionsAccessor
@@ -93,7 +94,6 @@ namespace newsletter.DemoWeb
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseDatabaseErrorPage();
             }
             else
             {
@@ -120,7 +120,7 @@ namespace newsletter.DemoWeb
                     multiTenantOptions,
                     _sslIsAvailable);
 
-           
+#pragma warning disable MVC1005
             app.UseMvc(routes =>
             {
                 var useFolders = multiTenantOptions.Mode == cloudscribe.Core.Models.MultiTenantMode.FolderName;
@@ -129,7 +129,7 @@ namespace newsletter.DemoWeb
                 // you can change or add routes there
                 routes.UseCustomRoutes(useFolders);
             });
-
+#pragma warning restore MVC1005 
         }
 
 
